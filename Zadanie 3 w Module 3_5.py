@@ -19,44 +19,38 @@ sales2016 = ['492,952','315,115','308,561','300,528','234,340','249,047','180,19
 '183,730','NA','NA','177,301','191,617','253,483','208,575','NA','195,653','NA']
 
 model = [i.split(' - ') for i in models]
+brands = [i[0] for i in model]
+models = [i[1] for i in model]
 
-brands = []
-for i in model:
-    brands.append(i[0])
-
-models = []
-for i in model:
-    models.append(i[1])
-
-sales2018 = [s18.replace(",","") for s18 in sales2018]
-sales2018 = [s18.replace("NA","0") for s18 in sales2018]
-sales2018 = [int(s18) for s18 in sales2018]
-
-sales2017 = [s17.replace(",","") for s17 in sales2017]
-sales2017 = [s17.replace("NA","0") for s17 in sales2017]
-sales2017 = [int(s17) for s17 in sales2017]
-
-sales2016 = [s16.replace(",","") for s16 in sales2016]
-sales2016 = [s16.replace("NA","0") for s16 in sales2016]
-sales2016 = [int(s16) for s16 in sales2016]
-
-d = list(zip(brands, models, sales2016, sales2017, sales2018))
+sales2018 = [int(s18.replace(",","").replace("NA","0")) for s18 in sales2018]
+sales2017 = [int(s17.replace(",","").replace("NA","0")) for s17 in sales2017]
+sales2016 = [int(s16.replace(",","").replace("NA","0")) for s16 in sales2016]
 
 cars = {}
-for i in d:
-    if not i[0] in cars:
-        cars[i[0]] = {i[1]: {'sales': {'2016': i[2], '2017': i[3], '2018': i[4]}}}
+for brand, model, s16, s17, s18 in zip(brands, models, sales2016, sales2017, sales2018):
+    if not brand in cars:
+        cars[brand] = {model: {'sales': {'2016': s16, '2017': s17, '2018': s18}}}
     else:
-        cars[i[0]].update({i[1]: {'sales': {'2016': i[2], '2017': i[3], '2018': i[4]}}})
+        cars[brand].update({model: {'sales': {'2016': s16, '2017': s17, '2018': s18}}})
 
-best2017 = []
-for k in cars.keys():
-    for k1 in cars[k].keys():
-        for k2 in cars[k][k1].keys():
-            best2017.append([k1, cars[k][k1][k2]['2017']])
-b17 = [b for a, b in best2017]
-i17 = b17.index(max(b17))
-bm17 = best2017[i17][0]
+answer1 = max([v, v2['2017'] for v in cars.values() for v1 in v.values() for v2 in v1.values()], key=lambda x: x[1])[0])
+#for v in cars.values():
+#    #print(v1)
+
+#    for v1 in v.values():
+#        print(v1)
+
+#        for v2 in v1.values():
+#            print(v2)
+
+#best2017 = []
+#for k in cars.keys():
+#    for k1 in cars[k].keys():
+#        for k2 in cars[k][k1].keys():
+#            best2017.append([k1, cars[k][k1][k2]['2017']])
+#b17 = [b for a, b in best2017]
+#i17 = b17.index(max(b17))
+#bm17 = best2017[i17][0]
 
 best2018 = []
 for k in cars.keys():
@@ -92,9 +86,10 @@ for k1 in cars[k].keys():
         Ford18.append(cars[k][k1][k2]['2018'])
 up = str(int((sum(Ford18)/sum(Ford17)-1)*100))+'%'
 
-answer1 = bm17 # wskaż nazwę modelu jako string
+#answer1 = bm17 # wskaż nazwę modelu jako string
 answer2 = bp18 # wskaż producenta jako string
 answer3 = dif # wskaż odpowiedź jako listę zawierającą wszystkie modele spełniające kryteria
 answer4 = lm # wskaż nazwę modelu jako string
 answer5 = up # odpowiedź podaj w formacie procentowym jako string. Np. '21%'
 
+print(answer1, answer2, answer3, answer4, answer5)
