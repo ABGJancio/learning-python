@@ -33,63 +33,30 @@ for brand, model, s16, s17, s18 in zip(brands, models, sales2016, sales2017, sal
     else:
         cars[brand].update({model: {'sales': {'2016': s16, '2017': s17, '2018': s18}}})
 
-answer1 = max([v, v2['2017'] for v in cars.values() for v1 in v.values() for v2 in v1.values()], key=lambda x: x[1])[0])
-#for v in cars.values():
-#    #print(v1)
+# Twoja linijka: answer1 = max([[k1, v2['2017'] for v in cars.values() for k1, v1 in v.values() for v2 in v1.values()], key=lambda x: x[1])[0]
+# poprawny fragment      =     [[k1, v2['2017']] for v in cars.values() for k1, v1 in v.items() for v2 in v1.values()]
+# nie ogarniam lambdy wg Twojej podpowiedzi, mam innego pomysła
+mod17 = [k1 for v in cars.values() for k1 in v.keys()]
+sel17 = [v2['2017'] for v in cars.values() for v1 in v.values() for v2 in v1.values()]
+answer1 = mod17[sel17.index(max(sel17))]
 
-#    for v1 in v.values():
-#        print(v1)
+producers2018 = [[k, v2['2018']] for k, v in cars.items() for v1 in v.values() for v2 in v1.values()]
+producers18 = {}
+for p, s in producers2018:
+    if not p in producers18:
+        producers18[p] = [s]
+    else:
+        producers18[p].extend([s])
+prod18 = [p for p in producers18.keys()]
+sel18 = [sum(s) for s in producers18.values()]
+answer2 = prod18[sel18.index(max(sel18))]
 
-#        for v2 in v1.values():
-#            print(v2)
+analize = [[k1, v2['2016'], v2['2017'], v2['2018']] for v in cars.values() for k1, v1 in v.items() for v2 in v1.values()]
+answer3 = [a for a, b, c, d in analize if b == 0 and c != 0]
 
-#best2017 = []
-#for k in cars.keys():
-#    for k1 in cars[k].keys():
-#        for k2 in cars[k][k1].keys():
-#            best2017.append([k1, cars[k][k1][k2]['2017']])
-#b17 = [b for a, b in best2017]
-#i17 = b17.index(max(b17))
-#bm17 = best2017[i17][0]
+least = [b+c+d for a, b, c, d in analize]
+answer4 = analize[least.index(min(least))][0]
 
-best2018 = []
-for k in cars.keys():
-    for k1 in cars[k].keys():
-        for k2 in cars[k][k1].keys():
-            best2018.append([k, cars[k][k1][k2]['2018']])
-b18 = [b for a, b in best2018]
-i18 = b18.index(max(b18))
-bp18 = best2018[i18][0]
-
-analize = []
-for k in cars.keys():
-    for k1 in cars[k].keys():
-        for k2 in cars[k][k1].keys():
-            analize.append([k1, cars[k][k1][k2]['2016'], cars[k][k1][k2]['2017']])
-dif = [a for a, b, c in analize if b == 0 and c != 0]
-
-least_one = []
-for k in cars.keys():
-    for k1 in cars[k].keys():
-        for k2 in cars[k][k1].keys():
-            least_one.append([k1, cars[k][k1][k2]['2016'], cars[k][k1][k2]['2017'], cars[k][k1][k2]['2018']])
-least = [a+b+c for i, a, b, c in least_one]
-l = least.index(min(least))
-lm = least_one[l][0]
-
-Ford17 = []
-Ford18 = []
-k = 'Ford'
-for k1 in cars[k].keys():
-    for k2 in cars[k][k1].keys():
-        Ford17.append(cars[k][k1][k2]['2017'])
-        Ford18.append(cars[k][k1][k2]['2018'])
-up = str(int((sum(Ford18)/sum(Ford17)-1)*100))+'%'
-
-#answer1 = bm17 # wskaż nazwę modelu jako string
-answer2 = bp18 # wskaż producenta jako string
-answer3 = dif # wskaż odpowiedź jako listę zawierającą wszystkie modele spełniające kryteria
-answer4 = lm # wskaż nazwę modelu jako string
-answer5 = up # odpowiedź podaj w formacie procentowym jako string. Np. '21%'
-
-print(answer1, answer2, answer3, answer4, answer5)
+Ford17 = [v2['2017'] for v1 in cars['Ford'].values() for v2 in v1.values()]
+Ford18 = [v2['2018'] for v1 in cars['Ford'].values() for v2 in v1.values()]
+answer5 = str(int((sum(Ford18)/sum(Ford17)-1)*100))+'%'
