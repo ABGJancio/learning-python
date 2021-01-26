@@ -33,7 +33,7 @@ for brand, model, s16, s17, s18 in zip(brands, models, sales2016, sales2017, sal
     else:
         cars[brand].update({model: {'sales': {'2016': s16, '2017': s17, '2018': s18}}})
 
-answer1 = max([[k1, v2['2017']] for v in cars.values() for k1, v1 in v.items() for v2 in v1.values()], key=lambda x: x[1])[0]
+answer1 = max([[k1, v2['2017']] for v in cars.values() for k1, v1 in v.items() for v2 in v1.values()], key=lambda by_sales: by_sales[1])[0]
 # wcześniejszy pomysł
 #mod17 = [k1 for v in cars.values() for k1 in v.keys()]
 #sel17 = [v2['2017'] for v in cars.values() for v1 in v.values() for v2 in v1.values()]
