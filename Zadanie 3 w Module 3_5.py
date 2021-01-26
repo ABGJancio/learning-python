@@ -33,23 +33,22 @@ for brand, model, s16, s17, s18 in zip(brands, models, sales2016, sales2017, sal
     else:
         cars[brand].update({model: {'sales': {'2016': s16, '2017': s17, '2018': s18}}})
 
-# Twoja linijka: answer1 = max([[k1, v2['2017'] for v in cars.values() for k1, v1 in v.values() for v2 in v1.values()], key=lambda x: x[1])[0]
-# poprawny fragment      =     [[k1, v2['2017']] for v in cars.values() for k1, v1 in v.items() for v2 in v1.values()]
-# nie ogarniam lambdy wg Twojej podpowiedzi, mam innego pomysła
-mod17 = [k1 for v in cars.values() for k1 in v.keys()]
-sel17 = [v2['2017'] for v in cars.values() for v1 in v.values() for v2 in v1.values()]
-answer1 = mod17[sel17.index(max(sel17))]
+answer1 = max([[k1, v2['2017']] for v in cars.values() for k1, v1 in v.items() for v2 in v1.values()], key=lambda x: x[1])[0]
+# wcześniejszy pomysł
+#mod17 = [k1 for v in cars.values() for k1 in v.keys()]
+#sel17 = [v2['2017'] for v in cars.values() for v1 in v.values() for v2 in v1.values()]
+#answer1 = mod17[sel17.index(max(sel17))]
 
-producers2018 = [[k, v2['2018']] for k, v in cars.items() for v1 in v.values() for v2 in v1.values()]
-producers18 = {}
-for p, s in producers2018:
-    if not p in producers18:
-        producers18[p] = [s]
+brands2018 = [[k, v2['2018']] for k, v in cars.items() for v1 in v.values() for v2 in v1.values()]
+brands18 = {}
+for p, s in brands2018:
+    if not p in brands18:
+        brands18[p] = [s]
     else:
-        producers18[p].extend([s])
-prod18 = [p for p in producers18.keys()]
-sel18 = [sum(s) for s in producers18.values()]
-answer2 = prod18[sel18.index(max(sel18))]
+        brands18[p].append(s) # lub extend([s])
+brand18 = [p for p in brands18.keys()]
+sel18 = [sum(s) for s in brands18.values()]
+answer2 = brand18[sel18.index(max(sel18))]
 
 analize = [[k1, v2['2016'], v2['2017'], v2['2018']] for v in cars.values() for k1, v1 in v.items() for v2 in v1.values()]
 answer3 = [a for a, b, c, d in analize if b == 0 and c != 0]
@@ -57,6 +56,6 @@ answer3 = [a for a, b, c, d in analize if b == 0 and c != 0]
 least = [b+c+d for a, b, c, d in analize]
 answer4 = analize[least.index(min(least))][0]
 
-Ford17 = [v2['2017'] for v1 in cars['Ford'].values() for v2 in v1.values()]
-Ford18 = [v2['2018'] for v1 in cars['Ford'].values() for v2 in v1.values()]
-answer5 = str(int((sum(Ford18)/sum(Ford17)-1)*100))+'%'
+ford17 = [v2['2017'] for v1 in cars['Ford'].values() for v2 in v1.values()]
+ford18 = [v2['2018'] for v1 in cars['Ford'].values() for v2 in v1.values()]
+answer5 = str(int((sum(ford18)/sum(ford17)-1)*100))+'%'
