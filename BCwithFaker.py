@@ -1,5 +1,7 @@
 from faker import Faker
 fake = Faker('pl_PL')
+
+
 def create_contacts(kind, q):
     if kind == "BaseContacts":
         return [BaseContact(fake.first_name(), fake.last_name(), fake.company_email(), fake.phone_number()) for _ in range(q)]
@@ -8,13 +10,14 @@ def create_contacts(kind, q):
     else:
         return "Set right kind!"
 
+
 class BaseContact:
     def __init__(self, first_name, last_name, e_mail, phone):
         self.first_name = first_name
         self.last_name = last_name
         self.e_mail = e_mail
         self.phone = phone
-        #Variables
+        # Variables
         self.label_max = 16
 
     def __str__(self):
@@ -30,7 +33,7 @@ class BaseContact:
     def label_length(self):
         return len(f"{self.first_name} {self.last_name}")
 
-    #@label_length.setter
+    # @label_length.setter
     @property
     def length_check(self):
         if self.label_length <= self.label_max:
@@ -41,18 +44,20 @@ class BaseContact:
             except ValueError:
                 return f"Name {self.first_name} {self.last_name} is to long - {self.label_length} characters; exceeds top length of address line: 15 characters"
 
+
 class BusinessContact(BaseContact):
     def __init__(self, first_name, last_name, e_mail, phone, company, occupation, business_phone):
         super().__init__(first_name, last_name, e_mail, phone)
         self.company = company
         self.occupation = occupation
         self.business_phone = business_phone
-    
+
     def __str__(self):
         return f'{self.first_name} {self.last_name} : {self.business_phone}'
-    
+
     def contact(self):
         return f"wybieram numer {self.business_phone} i dzwonię do {self.first_name} {self.last_name}"
+
 
 base_contacts = create_contacts("BaseContacts", 5)
 
