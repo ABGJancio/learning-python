@@ -1,0 +1,70 @@
+from faker import Faker
+fake = Faker('pl_PL')
+#def create_contacts(kind, q):
+#    if kind == "BaseContacts":
+#        new_contacts = [BaseContact(fake.first_name(), fake.last_name(), fake.company_email(), fake.phone_number()) for _ in range(q)]
+#    elif kind == "BusinessContacts":
+#        extended_contacts = [BusinessContact(fake.first_name(), fake.last_name(), fake.company_email(), fake.phone_number(), fake.company(), fake.job(), fake.phone_number()) for _ in range(q)]
+#    else:
+#        print("Set right kind!")
+
+class BaseContact:
+    def __init__(self, first_name, last_name, e_mail, phone):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.e_mail = e_mail
+        self.phone = phone
+        #Variables
+        self.label_max = 16
+    def __str__(self):
+        return f'{self.first_name} {self.last_name} : {self.phone}'
+    def __repr__(self):
+        return f"\nfirst_name={self.first_name} last_name={self.last_name}, e_mail={self.e_mail}, phone={self.phone}"
+    def contact(self):
+        return f"Wybieram numer {self.phone} i dzwonię do {self.first_name} {self.last_name}"
+    @property
+    def label_length(self):
+        return len(f"{self.first_name} {self.last_name}")
+    @property
+    def length_check(self):
+        if self.label_length <= self.label_max:
+            print(f"Name {self.first_name} {self.last_name} fits in the address line")
+        else:
+            try:
+                raise ValueError()
+            except ValueError:
+                print(f"Name {self.first_name} {self.last_name} is to long - {self.label_length} characters; exceeds top length of address line: 15 characters")
+
+class BusinessContact(BaseContact):
+    def __init__(self, first_name, last_name, e_mail, phone, company, occupation, business_phone):
+        super().__init__(first_name, last_name, e_mail, phone)
+        self.company = company
+        self.occupation = occupation
+        self.business_phone = business_phone
+    def __str__(self):
+        return f'{self.first_name} {self.last_name} : {self.business_phone}'
+    def contact(self):
+        return f"wybieram numer {self.business_phone} i dzwonię do {self.first_name} {self.last_name}"
+
+#create_contacts("BaseContacts", 5)
+new_contacts = [BaseContact(fake.first_name(), fake.last_name(), fake.company_email(), fake.phone_number()) for _ in range(5)]
+nc_one = new_contacts[0]
+nc_two = new_contacts[1]
+nc_three = new_contacts[2]
+nc_four = new_contacts[3]
+nc_five = new_contacts[4]
+
+extended_contacts = [BusinessContact(fake.first_name(), fake.last_name(), fake.company_email(), 
+                                     fake.phone_number(), fake.company(), fake.job(), fake.phone_number()
+                                    ) for _ in range(5)]
+ec_one = extended_contacts[0]
+ec_two = extended_contacts[1]
+ec_three = extended_contacts[2]
+ec_four = extended_contacts[3]
+ec_five = extended_contacts[4]
+
+print(nc_two.contact())
+print(ec_three.contact())
+
+print(nc_five.length_check)
+print(ec_four.length_check)
