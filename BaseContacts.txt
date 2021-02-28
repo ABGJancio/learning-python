@@ -1,5 +1,1 @@
-('Hubert', 'Œwiæ', 'sjeszke@interia.pl', '+48 500 424 090')
-('Ida', 'Miszkurka', 'jakub23@grupa.pl', '798 220 434')
-('Piotr', 'Misiejuk', 'michal77@yahoo.com', '882 728 356')
-('Juliusz', 'Osada', 'blazej56@gmail.com', '+48 739 985 513')
-('Przemys³aw', 'Kêsek', 'odrzywolekjuliusz@yahoo.com', '+48 665 879 496')
+[('Jakub', 'Wojtyna', 'mwiduch@fpuh.org', '600 471 697'), ('Stefan', 'Malcherek', 'imakar@belza-bondaruk.pl', '+48 721 001 823'), ('Mieszko', 'Ludwin', 'kieratadrian@pyrkosz.net', '720 241 449'), ('Andrzej', 'RaŸny', 'dawidlemanowicz@bosek-wysota.pl', '+48 511 101 927'), ('Monika', 'Zdancewicz', 'nataszawalesa@ppuh.com', '22 192 70 43')]

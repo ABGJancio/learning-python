@@ -1,8 +1,10 @@
+"""Fake contacts generator."""
 from faker import Faker
 fake = Faker('pl_PL')
 
 
 def create_contacts(kind, q):
+    """Create class lists od fake contacts."""
     if kind == "BaseContacts":
         return [BaseContact(fake.first_name(), fake.last_name(), fake.company_email(), fake.phone_number()) for _ in range(q)]
     elif kind == "BusinessContacts":
@@ -12,7 +14,18 @@ def create_contacts(kind, q):
 
 
 class BaseContact:
+    """This is a class for my business contacts."""
+
     def __init__(self, first_name, last_name, e_mail, phone):
+        """
+        Construct for BaseContact class.
+
+        Parameters:
+            first_name (str)
+            last_name (str)
+            e_mail (str)
+            phone (str)
+        """
         self.first_name = first_name
         self.last_name = last_name
         self.e_mail = e_mail
@@ -42,7 +55,7 @@ class BaseContact:
             try:
                 raise ValueError()
             except ValueError:
-                return f"Name {self.first_name} {self.last_name} is to long - {self.label_length} characters; exceeds top length of address line: 15 characters"
+                return f"Name {self.first_name} {self.last_name} is too long - {self.label_length} characters; exceeds top length of address line: 15 characters"
 
 
 class BusinessContact(BaseContact):
