@@ -1,1 +1,0 @@
-[('Jakub', 'Wojtyna', 'mwiduch@fpuh.org', '600 471 697'), ('Stefan', 'Malcherek', 'imakar@belza-bondaruk.pl', '+48 721 001 823'), ('Mieszko', 'Ludwin', 'kieratadrian@pyrkosz.net', '720 241 449'), ('Andrzej', 'Raüny', 'dawidlemanowicz@bosek-wysota.pl', '+48 511 101 927'), ('Monika', 'Zdancewicz', 'nataszawalesa@ppuh.com', '22 192 70 43')]
