@@ -1,0 +1,11 @@
+2021-03-09 00:43:13,267 - __main__ - INFO - Pierwszy sk³adnik: = 34.0 .
+2021-03-09 00:43:15,739 - __main__ - INFO - Nastêpny sk³adnik: = 56.0 .
+2021-03-09 00:43:23,747 - __main__ - INFO - Nastêpny sk³adnik: = 78.0 .
+2021-03-09 00:43:25,491 - __main__ - INFO - Wynik dodawania: 168.0
+2021-03-09 00:44:42,099 - __main__ - ERROR - To nie jest liczba!
+2021-03-09 00:44:52,275 - __main__ - INFO - Dzieln¹ jest: = 345.0 .
+2021-03-09 00:44:55,586 - __main__ - ERROR - To nie jest liczba!
+2021-03-09 00:44:59,231 - __main__ - INFO - Dzielnik to: = 67.0 .
+2021-03-09 00:45:08,003 - __main__ - ERROR - To nie jest liczba!
+2021-03-09 00:45:22,642 - __main__ - INFO - Dzielnik to: = 56.0 .
+2021-03-09 00:45:24,866 - __main__ - INFO - Wynik dzielenia: 0.09195095948827292
