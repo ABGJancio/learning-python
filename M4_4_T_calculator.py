@@ -219,6 +219,7 @@ if __name__ == "__main__":
                 print(f"To nie jest liczba z przedziału od 1 do {list(actions.keys())[-1]}")
             else:
                 calc_logger.info(operation())
+                print(operation())
                 break
         choice = input('Czy chcesz wykonać inne działanie? t/n: ')
         if choice == 't':
@@ -228,3 +229,4 @@ if __name__ == "__main__":
         return
 
     calculator()
+    
